@@ -1,31 +1,16 @@
 var thickness = 50;
 var button = 0;
-// var vibVal = 0;
 var tw1Count = 0;
 var tw2Count = 0;
 var circle = [];
 var k1 = "";
 var k2 = "";
 var lines = [];
+var del = false;
 var submitted = false;
 
 // socket will listen for the data from the hardware components and twitter
 var socket = io.connect('//localhost:3000');
-
-// socket.on('data', function(data) {
-
-//     potVal = data.val;
-// });
-
-// socket.on('btn', function(btn) {
-
-//     button = btn.val;
-// });
-
-// socket.on('vib', function(vib) {
-
-//     vibVal = vib.val;
-// });
 
 // http://www.adomas.org/javascript-mouse-wheel/
 function handle(delta) {
@@ -101,9 +86,7 @@ function draw(){
     // when having more than 0 line, draw in through for loop
     if(lines.length > 0){
         for(var i=0;i<lines.length;i++){
-            //var val = map(potVal, 0, 1023, 2, 50);
 
-            // setStroke(val) is to set the thickness of lines (value from potentiometer)
             lines[i].setStroke(thickness);
             lines[i].appear();
             lines[i].fall();
@@ -131,12 +114,13 @@ function draw(){
         }
     }
 
-    // handle vibration sensor
-    // if(vibVal < 500){
-    //     lines.splice(0,lines.length);
-    //     tw1Count = 0;
-    //     tw2Count = 0;
-    // }
+    // clear entries
+    if(del){
+        lines.splice(0,lines.length);
+        tw1Count = 0;
+        tw2Count = 0;
+        del = false;
+    }
 
     // handle button press
     if(button == 1){
@@ -176,6 +160,7 @@ function keyPressed(){
     }
     if(keyCode == BACKSPACE || keyCode == DELETE){
         console.log("delete");
+        del = true;
     }
 }
 
@@ -325,15 +310,13 @@ Circle.prototype.appear = function(r1,r2){
 
 jQuery.noConflict();
 jQuery(document).ready(function(){
-    //jQuery('#info').hide();
-    // jQuery('#info-icon').mouseover(function(){
-    //     jQuery('#info').fadeIn(1000);
-    // });
-    // jQuery('#info-icon').mouseout(function(){
-    //     jQuery('#info').fadeOut(1000);
-    // });
+    //http://stackoverflow.com/questions/11112127/prevent-backspace-from-navigating-back-with-jquery-like-googles-homepage
+    jQuery(document).on("keydown", function (e) {
+        if (e.which === 8 && !jQuery(e.target).is("input, textarea")) {
+            e.preventDefault();
+        }
+    });
     jQuery('#info-icon').mouseover(function(){
-        //jQuery('#info').show();
         jQuery('#info').removeClass('hide-first-time');
         jQuery('#info').addClass('show');
         jQuery('#info').removeClass('hide');
