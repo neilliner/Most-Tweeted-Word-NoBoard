@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Most Tweeted Word</title>
+    <script src='//localhost:3000/js/vendor/jquery-1.10.2.min.js'></script>
+    <script src='//localhost:3000/socket.io/socket.io.js'></script>
+    <script src='//localhost:3000/js/vendor/p5.min.js'></script>
+    <script src='//localhost:3000/js/main.js'></script>
+    <!--<link href='https://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic
+        |Exo:400,300,200,100,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic
+        |Karla:400,700,400italic,700italic
+        |Maven+Pro:400,500,700,900
+        |Raleway:400,100,200,300,500,600,700,800,900
+        |Ubuntu:400,700italic,500italic,400italic,300italic,700,500,300
+        |Lato:400,900italic,700italic,400italic,300italic,100italic,900,700,300,100
+        |Open+Sans:400,800italic,700italic,600italic,400italic,300italic,800,700,600,300' 
+    rel='stylesheet' type='text/css'>-->
+    <link href='https://fonts.googleapis.com/css?family=Exo:400,300,200,100,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic|Raleway:400,100,200,300,500,600,700,800,900'rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='//localhost:3000/css/style.css'>
+</head>
+<body onload="checkFirstVisit()">
+    <div id="bg">
+        <div id="input-text">
+            <div id="header-text">
+                <h1 class="exo">MOST TWEETED WORD</h1>
+                <p class="raleway space1px">type two words to compare which tweeted most</p>
+                <br>
+            </div>
+            <form>
+                <input type="text" id ="keyword-1" name="keyword-1" class="tbx-underline tbx-left exo">
+                <input type="text" id ="keyword-2" name="keyword-2" class="tbx-underline tbx-right exo">
+                <br><br>
+                <input type="submit" id="submit" value="submit" class="exo">
+            </form>
+            <br>
+            <p id="warning-msg" class="hidden raleway space1px">please input keywords</p>
+        </div>
+    </div>
+    <div id="info-icon" class="raleway">
+        <p>i</p>
+    </div>
+    <div id="info" class="raleway hide-first-time">
+        <h3 class="exo space1px">information</h3>
+        <p><span class="bold space1px">MOUSE CLICK & HOLD</span> - concentric circle chart view</p>
+        <p><span class="bold">MOUSE WHEEL</span> - adjust bars thickness</p>
+        <p><span class="bold">DELETE/BACKSPACE</span> - clear all entries</p>
+        <p><span class="bold">ESCAPE</span> - back to home/input new words</p>
+    </div>
+</body>
+</html>
+
